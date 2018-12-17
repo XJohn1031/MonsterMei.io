@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>spring事务 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="transactional logger.info(“isActualTransactionActive: {}, isSynchronizationActive: {}.”, TransactionSynchronizationManager.isActualTransactionActive(), TransactionSynchronizationManager.isSynchronizat">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spring事务">
+<meta property="og:url" content="http://yoursite.com/2018/12/18/spring事务/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="transactional logger.info(“isActualTransactionActive: {}, isSynchronizationActive: {}.”, TransactionSynchronizationManager.isActualTransactionActive(), TransactionSynchronizationManager.isSynchronizat">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://note.youdao.com/yws/api/personal/file/WEB7746b0a0d651d3e7edd683a2a2920172?method=download&shareKey=04bf6afa0342228c8d21aace2f88bf51">
+<meta property="og:image" content="https://note.youdao.com/yws/api/personal/file/WEB7113c8fc16eafede5ec1775dd6c4c988?method=download&shareKey=8e62001bf42e0ef8e2934deb4f44ccb5">
+<meta property="og:image" content="https://docs.spring.io/spring/docs/current/spring-framework-reference/images/tx.png">
+<meta property="og:image" content="https://note.youdao.com/yws/api/personal/file/WEB8a1ae25281c75e0b335e37b75b61088a?method=download&shareKey=f1f4953cb086c4be3c502ff4dd1f8014">
+<meta property="og:image" content="https://note.youdao.com/yws/api/personal/file/WEB558dae1d9e29c98ba2a78a77bb1bb27b?method=download&shareKey=da41d5a74c917ba0fdc6e61462425b27">
+<meta property="og:image" content="https://note.youdao.com/yws/api/personal/file/WEB48eb1cb56ca036de195ca7e55692be8e?method=download&shareKey=e6ff53571ddaed14b4bef4a4ff983c7f">
+<meta property="og:updated_time" content="2018-12-17T16:32:15.788Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="spring事务">
+<meta name="twitter:description" content="transactional logger.info(“isActualTransactionActive: {}, isSynchronizationActive: {}.”, TransactionSynchronizationManager.isActualTransactionActive(), TransactionSynchronizationManager.isSynchronizat">
+<meta name="twitter:image" content="https://note.youdao.com/yws/api/personal/file/WEB7746b0a0d651d3e7edd683a2a2920172?method=download&shareKey=04bf6afa0342228c8d21aace2f88bf51">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-spring事务" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/12/18/spring事务/" class="article-date">
+  <time datetime="2018-12-17T16:31:45.000Z" itemprop="datePublished">2018-12-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      spring事务
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>transactional</p>
+<p>logger.info(“isActualTransactionActive: {}, isSynchronizationActive: {}.”, TransactionSynchronizationManager.isActualTransactionActive(), TransactionSynchronizationManager.isSynchronizationActive());</p>
+<h3 id="transaction-propagation-behaviors"><a href="#transaction-propagation-behaviors" class="headerlink" title="transaction propagation behaviors"></a>transaction propagation behaviors</h3><ul>
+<li>REQUIRED</li>
+</ul>
+<p>如果当前存在一个事务，则直接使用这个事务，如果没有，就重新创建一个事务</p>
+<ul>
+<li>SUPPORTS</li>
+</ul>
+<p>如果当前存在一个事务，则直接加入这个事务，如果没有就以non-transactionally继续执行</p>
+<ul>
+<li>MANDATORY</li>
+</ul>
+<p>检查现在是否有事务存在，如果没有，throw an exception</p>
+<ul>
+<li>REQUIRES_NEW</li>
+</ul>
+<p>总是会新开一个事务，如果当前已经存在了一个事务，则会把当前的事务挂起</p>
+<ul>
+<li>NOT_SUPPORTED</li>
+</ul>
+<p>不支持事务，如果当前已经存在事务，会将当前事务挂起</p>
+<ul>
+<li>NEVER</li>
+</ul>
+<p>不支持事务，如果当前已经存在事务，throw an exception</p>
+<ul>
+<li>NESTED</li>
+</ul>
+<p>如果当前存在事务，则增加一个嵌套事务，如果不存在，则新开一个事务</p>
+<h3 id="transaction-isolation-level"><a href="#transaction-isolation-level" class="headerlink" title="transaction isolation level"></a>transaction isolation level</h3><ul>
+<li>DEFAULT</li>
+</ul>
+<p>Use the default isolation level of the underlying datastore.</p>
+<ul>
+<li>READ_UNCOMMITTED</li>
+</ul>
+<p>dirty reads, non-repeatable reads and phantom reads can occur.</p>
+<ul>
+<li>READ_COMMITTED</li>
+</ul>
+<p>dirty reads are prevented; non-repeatable reads and phantom reads can occur.</p>
+<ul>
+<li>REPEATABLE_READ</li>
+</ul>
+<p>dirty reads and non-repeatable reads are prevented; phantom reads can occur. </p>
+<ul>
+<li>SERIALIZABLE</li>
+</ul>
+<p>dirty reads, non-repeatable reads and phantom reads are prevented.</p>
+<h3 id="TransactionManagementConfigurationSelector"><a href="#TransactionManagementConfigurationSelector" class="headerlink" title="TransactionManagementConfigurationSelector"></a>TransactionManagementConfigurationSelector</h3><p><img src="https://note.youdao.com/yws/api/personal/file/WEB7746b0a0d651d3e7edd683a2a2920172?method=download&amp;shareKey=04bf6afa0342228c8d21aace2f88bf51" alt="TransactionManagementConfigurationSelector"></p>
+<p>可以看出@Transactional注解生效的两种方式，一种是使用代理，一种是使用AspectJ。</p>
+<p>==可以通过以下注解指定实现方式==</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@EnableTransactionManagement(mode = AdviceMode.XXX)</span><br></pre></td></tr></table></figure>
+<p><img src="https://note.youdao.com/yws/api/personal/file/WEB7113c8fc16eafede5ec1775dd6c4c988?method=download&amp;shareKey=8e62001bf42e0ef8e2934deb4f44ccb5" alt="image"></p>
+<p>不需要额外的配置，使用@EnableTransactionManagement注解，并且声明mode类型为AdviceMode.AspectJ，即可在同级调用开启事务。</p>
+<h1 id="Spring-transaction"><a href="#Spring-transaction" class="headerlink" title="Spring transaction"></a>Spring transaction</h1><h3 id="global-transaction-and-local-transaction"><a href="#global-transaction-and-local-transaction" class="headerlink" title="global transaction and local transaction"></a>global transaction and local transaction</h3><p>global: 可操作多源，如db和mq；</p>
+<p>local: 只能操作一种数据源。</p>
+<h3 id="declarative-and-programmatic"><a href="#declarative-and-programmatic" class="headerlink" title="declarative and programmatic"></a>declarative and programmatic</h3><p>declarative: 声明式事务(推荐)<br>programmatic: 编程式事务</p>
+<h3 id="PlatformTransactionManager"><a href="#PlatformTransactionManager" class="headerlink" title="PlatformTransactionManager"></a>PlatformTransactionManager</h3><p>Spring 的核心事务策略概念接口。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public interface PlatformTransactionManager &#123;</span><br><span class="line">    //getTransaction会返回一个事务，(依赖于事务传播行为，可能会新建一个事务或抛异常等等)</span><br><span class="line">    TransactionStatus getTransaction(</span><br><span class="line">            TransactionDefinition definition) throws TransactionException;</span><br><span class="line"></span><br><span class="line">    void commit(TransactionStatus status) throws TransactionException;</span><br><span class="line"></span><br><span class="line">    void rollback(TransactionStatus status) throws TransactionException;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public interface TransactionStatus extends SavepointManager &#123;</span><br><span class="line"></span><br><span class="line">    boolean isNewTransaction();</span><br><span class="line">    //如果创建了一个nested transaction, 则需要对当前的事务保存一个savepoint</span><br><span class="line">    boolean hasSavepoint();</span><br><span class="line"></span><br><span class="line">    void setRollbackOnly();</span><br><span class="line"></span><br><span class="line">    boolean isRollbackOnly();</span><br><span class="line"></span><br><span class="line">    void flush();</span><br><span class="line"></span><br><span class="line">    boolean isCompleted();</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="org-springframework-jdbc-datasource-TransactionAwareDataSourceProxy"><a href="#org-springframework-jdbc-datasource-TransactionAwareDataSourceProxy" class="headerlink" title="org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy"></a>org.springframework.jdbc.datasource.TransactionAwareDataSourceProxy</h3><p>是DataSource的一个代理，属于lowest level</p>
+<p>==The Spring Framework does not support propagation of transaction contexts across remote calls,==</p>
+<h3 id="回滚"><a href="#回滚" class="headerlink" title="回滚"></a>回滚</h3><p>roll back is automatic only on unchecked exceptions</p>
+<h2 id="mybatis-amp-spring"><a href="#mybatis-amp-spring" class="headerlink" title="mybatis &amp; spring"></a>mybatis &amp; spring</h2><p>一个使用 MyBatis-Spring 的主要原因是它允许 MyBatis 参与到 Spring 的事务管理中。而 不是给 MyBatis 创建一个新的特定的事务管理器,MyBatis-Spring 利用了存在于 Spring 中的 DataSourceTransactionManager。==在事务处理期间,一个单独的 SqlSession 对象将会被创建 和使用。当事务完成时,这个 session 会以合适的方式提交或回滚。==</p>
+<h2 id="spring声明式事务的实现"><a href="#spring声明式事务的实现" class="headerlink" title="spring声明式事务的实现"></a>spring声明式事务的实现</h2><p>AOP和xml或注解结合，使用TransactionInterceptor和PlatformTransactionManager的实现结合来产生一个AOP代理去驱动事务。</p>
+<p><img src="https://docs.spring.io/spring/docs/current/spring-framework-reference/images/tx.png" alt="image"></p>
+<p>使用spring aop xml配置事务。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- from the file &apos;context.xml&apos; --&gt;</span><br><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;</span><br><span class="line">    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">    xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;</span><br><span class="line">    xmlns:tx=&quot;http://www.springframework.org/schema/tx&quot;</span><br><span class="line">    xsi:schemaLocation=&quot;</span><br><span class="line">        http://www.springframework.org/schema/beans</span><br><span class="line">        http://www.springframework.org/schema/beans/spring-beans.xsd</span><br><span class="line">        http://www.springframework.org/schema/tx</span><br><span class="line">        http://www.springframework.org/schema/tx/spring-tx.xsd</span><br><span class="line">        http://www.springframework.org/schema/aop</span><br><span class="line">        http://www.springframework.org/schema/aop/spring-aop.xsd&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- this is the service object that we want to make transactional --&gt;</span><br><span class="line">    &lt;bean id=&quot;fooService&quot; class=&quot;x.y.service.DefaultFooService&quot;/&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- the transactional advice (what &apos;happens&apos;; see the &lt;aop:advisor/&gt; bean below) --&gt;</span><br><span class="line">    &lt;tx:advice id=&quot;txAdvice&quot; transaction-manager=&quot;txManager&quot;&gt;</span><br><span class="line">        &lt;!-- the transactional semantics... --&gt;</span><br><span class="line">        &lt;tx:attributes&gt;</span><br><span class="line">            &lt;!-- all methods starting with &apos;get&apos; are read-only --&gt;</span><br><span class="line">            &lt;tx:method name=&quot;get*&quot; read-only=&quot;true&quot;/&gt;</span><br><span class="line">            &lt;!-- other methods use the default transaction settings (see below) --&gt;</span><br><span class="line">            &lt;tx:method name=&quot;*&quot;/&gt;</span><br><span class="line">        &lt;/tx:attributes&gt;</span><br><span class="line">    &lt;/tx:advice&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- ensure that the above transactional advice runs for any execution</span><br><span class="line">        of an operation defined by the FooService interface --&gt;</span><br><span class="line">    &lt;aop:config&gt;</span><br><span class="line">        &lt;aop:pointcut id=&quot;fooServiceOperation&quot; expression=&quot;execution(* x.y.service.FooService.*(..))&quot;/&gt;</span><br><span class="line">        &lt;aop:advisor advice-ref=&quot;txAdvice&quot; pointcut-ref=&quot;fooServiceOperation&quot;/&gt;</span><br><span class="line">    &lt;/aop:config&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- don&apos;t forget the DataSource --&gt;</span><br><span class="line">    &lt;bean id=&quot;dataSource&quot; class=&quot;org.apache.commons.dbcp.BasicDataSource&quot; destroy-method=&quot;close&quot;&gt;</span><br><span class="line">        &lt;property name=&quot;driverClassName&quot; value=&quot;oracle.jdbc.driver.OracleDriver&quot;/&gt;</span><br><span class="line">        &lt;property name=&quot;url&quot; value=&quot;jdbc:oracle:thin:@rj-t42:1521:elvis&quot;/&gt;</span><br><span class="line">        &lt;property name=&quot;username&quot; value=&quot;scott&quot;/&gt;</span><br><span class="line">        &lt;property name=&quot;password&quot; value=&quot;tiger&quot;/&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- similarly, don&apos;t forget the PlatformTransactionManager --&gt;</span><br><span class="line">    &lt;bean id=&quot;txManager&quot; class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;</span><br><span class="line">        &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;/&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- other &lt;bean/&gt; definitions here --&gt;</span><br><span class="line"></span><br><span class="line">&lt;/beans&gt;</span><br></pre></td></tr></table></figure></p>
+<p>The configuration shown earlier is used to create a transactional proxy around the object that is created from the fooService bean definition.</p>
+<p>所有的这些配置都是用来创建围绕fooService bean的一个事务代理。</p>
+<h6 id="rollback-for"><a href="#rollback-for" class="headerlink" title="rollback for"></a>rollback for</h6><p>默认的配置: spring会默认设置事务为 rollback only，这意味着只有在遇到unchecked Exception的时候才会触发rollback。checked Exception抛出的时候不会触发rollback。设置rollback for可以使checked Exception也触发回滚。当然设置no-rollback-for可以让某些异常不回滚。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;</span><br><span class="line">    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">    xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;</span><br><span class="line">    xmlns:tx=&quot;http://www.springframework.org/schema/tx&quot;</span><br><span class="line">    xsi:schemaLocation=&quot;</span><br><span class="line">        http://www.springframework.org/schema/beans</span><br><span class="line">        http://www.springframework.org/schema/beans/spring-beans.xsd</span><br><span class="line">        http://www.springframework.org/schema/tx</span><br><span class="line">        http://www.springframework.org/schema/tx/spring-tx.xsd</span><br><span class="line">        http://www.springframework.org/schema/aop</span><br><span class="line">        http://www.springframework.org/schema/aop/spring-aop.xsd&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;aop:config&gt;</span><br><span class="line"></span><br><span class="line">        &lt;aop:pointcut id=&quot;defaultServiceOperation&quot;</span><br><span class="line">                expression=&quot;execution(* x.y.service.*Service.*(..))&quot;/&gt;</span><br><span class="line"></span><br><span class="line">        &lt;aop:pointcut id=&quot;noTxServiceOperation&quot;</span><br><span class="line">                expression=&quot;execution(* x.y.service.ddl.DefaultDdlManager.*(..))&quot;/&gt;</span><br><span class="line"></span><br><span class="line">        &lt;aop:advisor pointcut-ref=&quot;defaultServiceOperation&quot; advice-ref=&quot;defaultTxAdvice&quot;/&gt;</span><br><span class="line"></span><br><span class="line">        &lt;aop:advisor pointcut-ref=&quot;noTxServiceOperation&quot; advice-ref=&quot;noTxAdvice&quot;/&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/aop:config&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- this bean will be transactional (see the &apos;defaultServiceOperation&apos; pointcut) --&gt;</span><br><span class="line">    &lt;bean id=&quot;fooService&quot; class=&quot;x.y.service.DefaultFooService&quot;/&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- this bean will also be transactional, but with totally different transactional settings --&gt;</span><br><span class="line">    &lt;bean id=&quot;anotherFooService&quot; class=&quot;x.y.service.ddl.DefaultDdlManager&quot;/&gt;</span><br><span class="line"></span><br><span class="line">    &lt;tx:advice id=&quot;defaultTxAdvice&quot;&gt;</span><br><span class="line">        &lt;tx:attributes&gt;</span><br><span class="line">            &lt;tx:method name=&quot;get*&quot; read-only=&quot;true&quot;/&gt;</span><br><span class="line">            &lt;tx:method name=&quot;*&quot;/&gt;</span><br><span class="line">        &lt;/tx:attributes&gt;</span><br><span class="line">    &lt;/tx:advice&gt;</span><br><span class="line"></span><br><span class="line">    &lt;tx:advice id=&quot;noTxAdvice&quot;&gt;</span><br><span class="line">        &lt;tx:attributes&gt;</span><br><span class="line">            &lt;tx:method name=&quot;*&quot; propagation=&quot;NEVER&quot;/&gt;</span><br><span class="line">        &lt;/tx:attributes&gt;</span><br><span class="line">    &lt;/tx:advice&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- other transaction infrastructure beans such as a PlatformTransactionManager omitted... --&gt;</span><br><span class="line"></span><br><span class="line">&lt;/beans&gt;</span><br></pre></td></tr></table></figure>
+<h6 id="tx-advice标签"><a href="#tx-advice标签" class="headerlink" title="tx:advice标签"></a><a href="tx:advice" target="_blank" rel="noopener">tx:advice</a>标签</h6><p><a href="tx:method" target="_blank" rel="noopener">tx:method</a> 默认值: </p>
+<ul>
+<li><p>The propagation setting is REQUIRED.</p>
+</li>
+<li><p>The isolation level is DEFAULT.</p>
+</li>
+<li><p>The transaction is read-write.</p>
+</li>
+<li><p>The transaction timeout defaults to the default timeout of the underlying transaction system or none if timeouts are not supported.</p>
+</li>
+<li><p>Any RuntimeException triggers rollback, and any checked Exception does not.</p>
+</li>
+</ul>
+<h4 id="使用-Transactional注解"><a href="#使用-Transactional注解" class="headerlink" title="使用@Transactional注解"></a>使用@Transactional注解</h4><p>注解生效xml配置:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- from the file &apos;context.xml&apos; --&gt;</span><br><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;</span><br><span class="line">    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">    xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;</span><br><span class="line">    xmlns:tx=&quot;http://www.springframework.org/schema/tx&quot;</span><br><span class="line">    xsi:schemaLocation=&quot;</span><br><span class="line">        http://www.springframework.org/schema/beans</span><br><span class="line">        http://www.springframework.org/schema/beans/spring-beans.xsd</span><br><span class="line">        http://www.springframework.org/schema/tx</span><br><span class="line">        http://www.springframework.org/schema/tx/spring-tx.xsd</span><br><span class="line">        http://www.springframework.org/schema/aop</span><br><span class="line">        http://www.springframework.org/schema/aop/spring-aop.xsd&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- this is the service object that we want to make transactional --&gt;</span><br><span class="line">    &lt;bean id=&quot;fooService&quot; class=&quot;x.y.service.DefaultFooService&quot;/&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- enable the configuration of transactional behavior based on annotations --&gt;</span><br><span class="line">    &lt;tx:annotation-driven transaction-manager=&quot;txManager&quot;/&gt;&lt;!-- a PlatformTransactionManager is still required --&gt; </span><br><span class="line">    &lt;bean id=&quot;txManager&quot; class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;</span><br><span class="line">        &lt;!-- (this dependency is defined somewhere else) --&gt;</span><br><span class="line">        &lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;/&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- other &lt;bean/&gt; definitions here --&gt;</span><br><span class="line"></span><br><span class="line">&lt;/beans&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="Transactional注解"><a href="#Transactional注解" class="headerlink" title="@Transactional注解"></a>@Transactional注解</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@Target(&#123;ElementType.METHOD, ElementType.TYPE&#125;)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Inherited</span><br><span class="line">@Documented</span><br></pre></td></tr></table></figure>
+<p>1.可以看到注解的适用范围是方法和类(包括接口和枚举)</p>
+<p>2.作用保留: 运行期也会保留</p>
+<p>3.可以被继承(指的是使用该注解的类)，寻找注解里面的annotaion type会向上查找</p>
+<h4 id="Transactional注解实现需要注意"><a href="#Transactional注解实现需要注意" class="headerlink" title="@Transactional注解实现需要注意:"></a>@Transactional注解实现需要注意:</h4><p>The Spring team recommends that you annotate only concrete classes (and methods of concrete classes) with the @Transactional annotation, as opposed to annotating interfaces. You certainly can place the @Transactional annotation on an interface (or an interface method), but this works only as you would expect it to if you use interface-based proxies. The fact that Java annotations are not inherited from interfaces means that, if you use class-based proxies (proxy-target-class=”true”) or the weaving-based aspect (mode=”aspectj”), the transaction settings are not recognized by the proxying and weaving infrastructure, and the object is not wrapped in a transactional proxy, which would be decidedly bad.</p>
+<p><img src="https://note.youdao.com/yws/api/personal/file/WEB8a1ae25281c75e0b335e37b75b61088a?method=download&amp;shareKey=f1f4953cb086c4be3c502ff4dd1f8014" alt="image"></p>
+<p>spring推荐使用@Transactional在类或者类方法上，而不是接口。因为@AspectJ(class-based)形式不支持在接口上实现事务，并且如果是代理模式，使用CGLIB代理(class-based)的话，也不支持接口上实现事务。JDK的实现方式支持(Interface-based)。</p>
+<p>When you use proxies, you should apply the @Transactional annotation only to methods with public visibility. If you do annotate protected, private or package-visible methods with the @Transactional annotation, no error is raised, but the annotated method does not exhibit the configured transactional settings. If you need to annotate non-public methods, consider using AspectJ (described later).<br>当注解使用在方法上的时候，@Transactional注解在默认的情况下(使用proxy)只能作用于public方法，如果需要作用在private或protected方法则需要使用AspectJ。这也就引出了另外一个问题，因为一般来说private方法是self-invocation的。</p>
+<p>In proxy mode (which is the default), only external method calls coming in through the proxy are intercepted. This means that self-invocation (in effect, a method within the target object calling another method of the target object) does not lead to an actual transaction at runtime even if the invoked method is marked with @Transactional. Also, the proxy must be fully initialized to provide the expected behavior, so you should not rely on this feature in your initialization code (that is, @PostConstruct).</p>
+<p>另一个问题是当出现self-invocation的时候，在proxy mode实现方式下@Transactional注解是不生效的，并且proxy mode实现必须是要求在使用前你的bean已经被完全初始化了。</p>
+<h6 id="proxy和AspectJ的实现原理"><a href="#proxy和AspectJ的实现原理" class="headerlink" title="proxy和AspectJ的实现原理"></a>proxy和AspectJ的实现原理</h6><p>The default mode (proxy) processes annotated beans to be proxied by using Spring’s AOP framework (following proxy semantics, as discussed earlier, applying to method calls coming in through the proxy only). The alternative mode (aspectj) instead weaves the affected classes with Spring’s AspectJ transaction aspect, modifying the target class byte code to apply to any kind of method call. AspectJ weaving requires spring-aspects.jar in the classpath as well as having load-time weaving (or compile-time weaving) enabled. (See Spring configuration for details on how to set up load-time weaving.)</p>
+<p>使用proxy的方式的时候，被代理的target进行方法调用的时候会先调用代理的方法，在代理的方法里面再对target方法进行调用。而使用AspectJ的时候，是直接修改了注解声明的类的字节码。AspectJ使用需要spring-aspects.jar和设置compile-time weaving(编译的时候强制使用AspectJ形式，很显然可以想到，因为AspectJ形式修改了类的字节码，类的byte code这是在编译的时候进行的)。</p>
+<h6 id="Transactional优先级别"><a href="#Transactional优先级别" class="headerlink" title="@Transactional优先级别"></a>@Transactional优先级别</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@Transactional(readOnly = true)</span><br><span class="line">public class DefaultFooService implements FooService &#123;</span><br><span class="line"></span><br><span class="line">    public Foo getFoo(String fooName) &#123;</span><br><span class="line">        // do something</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // these settings have precedence for this method</span><br><span class="line">    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)</span><br><span class="line">    public void updateFoo(Foo foo) &#123;</span><br><span class="line">        // do something</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="多个transaction-manager"><a href="#多个transaction-manager" class="headerlink" title="多个transaction manager"></a>多个transaction manager</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public class TransactionalService &#123;</span><br><span class="line"></span><br><span class="line">    @Transactional(&quot;order&quot;)</span><br><span class="line">    public void setSomething(String name) &#123; ... &#125;</span><br><span class="line"></span><br><span class="line">    @Transactional(&quot;account&quot;)</span><br><span class="line">    public void doSomething() &#123; ... &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;tx:annotation-driven/&gt;</span><br><span class="line"></span><br><span class="line">    &lt;bean id=&quot;transactionManager1&quot; class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;</span><br><span class="line">        ...</span><br><span class="line">        &lt;qualifier value=&quot;order&quot;/&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br><span class="line"></span><br><span class="line">    &lt;bean id=&quot;transactionManager2&quot; class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;</span><br><span class="line">        ...</span><br><span class="line">        &lt;qualifier value=&quot;account&quot;/&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br></pre></td></tr></table></figure>
+<p>当未指定使用哪个transaction manager的时候，默认的manager将会被使用。</p>
+<p>By default, a participating transaction joins the characteristics of the outer scope, silently ignoring the local isolation level, timeout value, or read-only flag (if any). Consider switching the validateExistingTransactions flag to true on your transaction manager if you want isolation level declarations to be rejected when participating in an existing transaction with a different isolation level. This non-lenient mode also rejects read-only mismatches (that is, an inner read-write transaction that tries to participate in a read-only outer scope).</p>
+<p>对于”PROPAGATION_REQUIRED”传播级别，默认的时候，outer事务的配置会覆盖inner的事务配置，也就是说开启新的事务的时候会使用existing transaction的配置。当需要使用inner transaction的配置时，需要将transaction manager的setValidateExistingTransaction设置true。</p>
+<h5 id="logical-transaction-and-physical-transaction"><a href="#logical-transaction-and-physical-transaction" class="headerlink" title="logical transaction and physical transaction"></a>logical transaction and physical transaction</h5><ul>
+<li>PROPAGATION_REQUIRED</li>
+</ul>
+<p>强制会有一个physical transaction，当一个带事务的方法被调用时，会生成一个logical transaction，这些logical transaction的配置都不会生效，而是使用outer transaction定义的isolation level, timeout value, or read-only flag。但是在出现异常回滚的时候，logical transaction如果需要回滚，会setRollbackOnly，此时不管physical transaction的rollback-for等等，只要transaction被set rollback only(the only possible outcome of the transaction may be a rollback)，physical transaction也会被回滚。</p>
+<ul>
+<li>PROPAGATION_REQUIRES_NEW</li>
+</ul>
+<p>会创建新的physical transaction，并且在这个隔离级别下，transaction的配置不会继承outer transaction，可以声明自己的 isolation level, timeout, and read-only。并且inner transaction的回滚也不会影响outer transaction。</p>
+<ul>
+<li>PROPAGATION_NESTED</li>
+</ul>
+<p>多个savepoint，一个physical transaction。如果嵌套的transaction中有一个inner transaction回滚了，只是当前的savepoint需要回滚，不会影响整个physical transaction。</p>
+<p>==通过TransactionStatus判断的==</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">public interface TransactionStatus extends SavepointManager, Flushable &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	boolean isNewTransaction();</span><br><span class="line"></span><br><span class="line">	boolean hasSavepoint();</span><br><span class="line"></span><br><span class="line">	void setRollbackOnly();</span><br><span class="line"></span><br><span class="line">	boolean isRollbackOnly();</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	void flush();</span><br><span class="line"></span><br><span class="line">	boolean isCompleted();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="transactionInterceptor"><a href="#transactionInterceptor" class="headerlink" title="transactionInterceptor"></a>transactionInterceptor</h5><p>transactionInterceptor的继承以及组合关系。可以看到transactionAspectSupport包含了transactionInfo内部类，而transactionInfo又组合了transactionStatus。<br><img src="https://note.youdao.com/yws/api/personal/file/WEB558dae1d9e29c98ba2a78a77bb1bb27b?method=download&amp;shareKey=da41d5a74c917ba0fdc6e61462425b27" alt="image"></p>
+<h5 id="TransactionProxyFactoryBean"><a href="#TransactionProxyFactoryBean" class="headerlink" title="TransactionProxyFactoryBean"></a>TransactionProxyFactoryBean</h5><p><img src="https://note.youdao.com/yws/api/personal/file/WEB48eb1cb56ca036de195ca7e55692be8e?method=download&amp;shareKey=e6ff53571ddaed14b4bef4a4ff983c7f" alt="image"></p>
+<h5 id="commit"><a href="#commit" class="headerlink" title="commit"></a>commit</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h5 id="rollback"><a href="#rollback" class="headerlink" title="rollback"></a>rollback</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/12/18/spring事务/" data-id="cjpsjf9wb0001xts6brpfzmbj" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/12/18/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/12/18/spring事务/">spring事务</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/18/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
