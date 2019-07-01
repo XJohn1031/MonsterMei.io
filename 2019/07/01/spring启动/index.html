@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="spring,spring启动,ApplicationContext,">
 
 
 
@@ -79,17 +79,18 @@
 
 
 
-<meta name="description" content="valar morghulis, not today">
-<meta name="keywords" content="java, mysql, spring, mybatis, dubbo, redis, rabbitMQ, etc...">
-<meta property="og:type" content="website">
-<meta property="og:title" content="MonsterMei">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="web.xml的解析 WEB-INF/web.xml  1234567891011121314151617181920212223242526272829303132333435363738&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&amp;gt;&amp;lt;web-app version=&quot;2.4&quot; xmlns=&quot;http://java.sun.com/xml/ns/j">
+<meta name="keywords" content="spring,spring启动,ApplicationContext">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spring启动">
+<meta property="og:url" content="http://yoursite.com/2019/07/01/spring启动/index.html">
 <meta property="og:site_name" content="MonsterMei">
-<meta property="og:description" content="valar morghulis, not today">
+<meta property="og:description" content="web.xml的解析 WEB-INF/web.xml  1234567891011121314151617181920212223242526272829303132333435363738&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&amp;gt;&amp;lt;web-app version=&quot;2.4&quot; xmlns=&quot;http://java.sun.com/xml/ns/j">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-01T14:05:32.565Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MonsterMei">
-<meta name="twitter:description" content="valar morghulis, not today">
+<meta name="twitter:title" content="spring启动">
+<meta name="twitter:description" content="web.xml的解析 WEB-INF/web.xml  1234567891011121314151617181920212223242526272829303132333435363738&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&amp;gt;&amp;lt;web-app version=&quot;2.4&quot; xmlns=&quot;http://java.sun.com/xml/ns/j">
 
 
 
@@ -119,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/">
+  <link rel="canonical" href="http://yoursite.com/2019/07/01/spring启动/">
 
 
 
 
 
-  <title>MonsterMei</title>
+  <title>spring启动 | MonsterMei</title>
   
 
 
@@ -144,8 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -238,9 +238,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -270,9 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/01/spring启动/" itemprop="url">spring启动</a></h1>
+          <h1 class="post-title" itemprop="name headline">spring启动</h1>
         
 
         <div class="post-meta">
@@ -344,9 +342,7 @@
       
 
       
-        
-          
-            <h3 id="web-xml的解析"><a href="#web-xml的解析" class="headerlink" title="web.xml的解析"></a>web.xml的解析</h3><ul>
+        <h3 id="web-xml的解析"><a href="#web-xml的解析" class="headerlink" title="web.xml的解析"></a>web.xml的解析</h3><ul>
 <li>WEB-INF/web.xml</li>
 </ul>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">web-app</span> <span class="attr">version</span>=<span class="string">"2.4"</span> <span class="attr">xmlns</span>=<span class="string">"http://java.sun.com/xml/ns/j2ee"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">         <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://java.sun.com/xml/ns/j2ee</span></span></span><br><span class="line"><span class="tag"><span class="string">                             http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">display-name</span>&gt;</span>ripple-flow-order<span class="tag">&lt;/<span class="name">display-name</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">context-param</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>contextConfigLocation<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>classpath:spring-config.xml<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">context-param</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">listener</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">listener-class</span>&gt;</span>org.springframework.web.context.ContextLoaderListener<span class="tag">&lt;/<span class="name">listener-class</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">listener</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>springmvc<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">servlet-class</span>&gt;</span>org.springframework.web.servlet.DispatcherServlet<span class="tag">&lt;/<span class="name">servlet-class</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">load-on-startup</span>&gt;</span>1<span class="tag">&lt;/<span class="name">load-on-startup</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">servlet</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">servlet-name</span>&gt;</span>springmvc<span class="tag">&lt;/<span class="name">servlet-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">servlet-mapping</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>requestLog<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">filter-class</span>&gt;</span>org.springframework.web.filter.DelegatingFilterProxy<span class="tag">&lt;/<span class="name">filter-class</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">async-supported</span>&gt;</span>true<span class="tag">&lt;/<span class="name">async-supported</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>requestLog<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">web-app</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -436,8 +432,6 @@
 </blockquote>
 <h5 id="12-finishRefresh"><a href="#12-finishRefresh" class="headerlink" title="12. finishRefresh"></a>12. finishRefresh</h5><p>初始化LifeCycle类Processor, 发布ApplicationContext初始化完成的Event。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Finish the refresh of this context, invoking the LifecycleProcessor's</span></span><br><span class="line"><span class="comment"> * onRefresh() method and publishing the</span></span><br><span class="line"><span class="comment"> * &#123;<span class="doctag">@link</span> org.springframework.context.event.ContextRefreshedEvent&#125;.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">finishRefresh</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">// Initialize lifecycle processor for this context.</span></span><br><span class="line">	initLifecycleProcessor();</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Propagate refresh to lifecycle processor first.</span></span><br><span class="line">	getLifecycleProcessor().onRefresh();</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Publish the final event.</span></span><br><span class="line">	publishEvent(<span class="keyword">new</span> ContextRefreshedEvent(<span class="keyword">this</span>));</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Participate in LiveBeansView MBean, if active.</span></span><br><span class="line">	LiveBeansView.registerApplicationContext(<span class="keyword">this</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
-          
-        
       
     </div>
     
@@ -452,160 +446,40 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/18/spring事务/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="XJohn">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MonsterMei">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/18/spring事务/" itemprop="url">spring事务</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-18T00:31:45+08:00">
-                2018-12-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/spring/" itemprop="url" rel="index">
-                    <span itemprop="name">spring</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
+            <a href="/tags/spring/" rel="tag"># spring</a>
           
-
+            <a href="/tags/spring启动/" rel="tag"># spring启动</a>
           
-            
+            <a href="/tags/ApplicationContext/" rel="tag"># ApplicationContext</a>
           
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
+      
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+      
       
       
 
       
-        
-          <p>transactional<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/12/18/spring事务/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/18/spring事务/" rel="next" title="spring事务">
+                <i class="fa fa-chevron-left"></i> spring事务
+              </a>
+            
           </div>
-          <!--/noindex-->
-        
-      
-    </p></div>
-    
-    
-    
 
-    
+          <span class="post-nav-divider"></span>
 
-    
-
-    
-
-    <footer class="post-footer">
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
       
 
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -615,10 +489,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -626,6 +501,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -646,8 +525,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -707,6 +595,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#web-xml的解析"><span class="nav-number">1.</span> <span class="nav-text">web.xml的解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web-xml中的listener"><span class="nav-number">2.</span> <span class="nav-text">web.xml中的listener</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ContextLoaderListener初始化"><span class="nav-number">3.</span> <span class="nav-text">ContextLoaderListener初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#配置并刷新根上下文"><span class="nav-number">3.1.</span> <span class="nav-text">配置并刷新根上下文</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-prepareRefresh"><span class="nav-number">3.1.1.</span> <span class="nav-text">1. prepareRefresh</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-obtainFreshBeanFactory"><span class="nav-number">3.1.2.</span> <span class="nav-text">2. obtainFreshBeanFactory</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-prepareBeanFactory"><span class="nav-number">3.1.3.</span> <span class="nav-text">3. prepareBeanFactory</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-postProcessBeanFactory"><span class="nav-number">3.1.4.</span> <span class="nav-text">4. postProcessBeanFactory</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-invokeBeanFactoryPostProcessors"><span class="nav-number">3.1.5.</span> <span class="nav-text">5. invokeBeanFactoryPostProcessors</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-registerBeanPostProcessors"><span class="nav-number">3.1.6.</span> <span class="nav-text">6. registerBeanPostProcessors</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#7-initMessageSource"><span class="nav-number">3.1.7.</span> <span class="nav-text">7. initMessageSource</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#8-initApplicationEventMulticaster"><span class="nav-number">3.1.8.</span> <span class="nav-text">8. initApplicationEventMulticaster</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#9-onRefresh"><span class="nav-number">3.1.9.</span> <span class="nav-text">9. onRefresh</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#10-registerListeners"><span class="nav-number">3.1.10.</span> <span class="nav-text">10. registerListeners</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#11-finishBeanFactoryInitialization"><span class="nav-number">3.1.11.</span> <span class="nav-text">11. finishBeanFactoryInitialization</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#12-finishRefresh"><span class="nav-number">3.1.12.</span> <span class="nav-text">12. finishRefresh</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -847,6 +751,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
