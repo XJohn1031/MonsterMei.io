@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="Optinal,java,">
 
 
 
@@ -79,17 +79,18 @@
 
 
 
-<meta name="description" content="valar morghulis, not today">
-<meta name="keywords" content="java, mysql, spring, mybatis, dubbo, redis, rabbitMQ, etc...">
-<meta property="og:type" content="website">
-<meta property="og:title" content="MonsterMei">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="Optional的一些实践">
+<meta name="keywords" content="Optinal,java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Optional">
+<meta property="og:url" content="http://yoursite.com/2019/07/01/Optional-md/index.html">
 <meta property="og:site_name" content="MonsterMei">
-<meta property="og:description" content="valar morghulis, not today">
+<meta property="og:description" content="Optional的一些实践">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-01T14:34:25.132Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MonsterMei">
-<meta name="twitter:description" content="valar morghulis, not today">
+<meta name="twitter:title" content="Optional">
+<meta name="twitter:description" content="Optional的一些实践">
 
 
 
@@ -119,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/">
+  <link rel="canonical" href="http://yoursite.com/2019/07/01/Optional-md/">
 
 
 
 
 
-  <title>MonsterMei</title>
+  <title>Optional | MonsterMei</title>
   
 
 
@@ -144,8 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -238,9 +238,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -270,9 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/01/Optional-md/" itemprop="url">Optional</a></h1>
+          <h1 class="post-title" itemprop="name headline">Optional</h1>
         
 
         <div class="post-meta">
@@ -355,18 +353,28 @@
       
 
       
-        
-          <p>Optional的一些实践<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/07/01/Optional-md/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+        <p>Optional的一些实践<br><a id="more"></a></p>
+<h4 id="returning-value-with-get"><a href="#returning-value-with-get" class="headerlink" title="returning value with get()"></a>returning value with get()</h4><p>结论：不要使用</p>
+<p>Optional的本意是让我们去避免一些出乎意料的异常，如果使用get()就违背了Optional设计的初衷，很可能get()方法会在将来的release中deprecated掉，所以最好使用其他的方式来让我们更好地去控制null case。</p>
+<h4 id="orElse-和orElseGet-区别"><a href="#orElse-和orElseGet-区别" class="headerlink" title="orElse()和orElseGet()区别"></a>orElse()和orElseGet()区别</h4><p>结论：使用orElseGet()</p>
+<ul>
+<li>orElse接收一个value</li>
+<li>orElseGet接收一个Supplier</li>
+</ul>
+<p>最主要的区别：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">public static String getMyDefault() &#123;</span><br><span class="line">	System.out.println(&quot;Getting Default Value&quot;);</span><br><span class="line">	return &quot;Default Value&quot;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">	String text = &quot;Text present&quot;;</span><br><span class="line"></span><br><span class="line">	System.out.println(&quot;Using orElseGet:&quot;);</span><br><span class="line">	String defaultText</span><br><span class="line">			= Optional.ofNullable(text).orElseGet(HashMapTest::getMyDefault);</span><br><span class="line">	Assert.check(&quot;Text present&quot;.equals(defaultText));</span><br><span class="line"></span><br><span class="line">	System.out.println(&quot;Using orElse:&quot;);</span><br><span class="line">	defaultText = Optional.ofNullable(text).orElse(getMyDefault());</span><br><span class="line">	Assert.check(&quot;Text present&quot;.equals(defaultText));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>返回结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Using orElseGet:</span><br><span class="line">Using orElse:</span><br><span class="line">Getting Default Value</span><br></pre></td></tr></table></figure>
+<p>可以明显地看出来使用orElse即使前面的条件没有为空，他还是调用了orElse里面的方法，而orElseGet不会。orElseGet源码明显地表示了如果value的值为null，就会调用入参Supplier的get方法取value。</p>
+<h4 id="stream-findFirst-orElseGet"><a href="#stream-findFirst-orElseGet" class="headerlink" title="stream().findFirst().orElseGet()"></a>stream().findFirst().orElseGet()</h4><p>findFirst()返回的是一个Optional对象，但是在调用orElseGet()的时候，会返回Optional<t>的value对象。</t></p>
+<h4 id="orElseThrow"><a href="#orElseThrow" class="headerlink" title="orElseThrow()"></a>orElseThrow()</h4><p>throw出来的exception必须是</p>
+<ul>
+<li>Runtime Exception</li>
+<li>方法上显示声明会抛出的Exception</li>
+</ul>
+
       
-    </p></div>
+    </div>
     
     
     
@@ -379,306 +387,38 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/01/spring-Servlet-ApplicationContext启动-md/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="XJohn">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MonsterMei">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/01/spring-Servlet-ApplicationContext启动-md/" itemprop="url">spring Servlet ApplicationContext启动.md</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-01T22:15:37+08:00">
-                2019-07-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/spring/" itemprop="url" rel="index">
-                    <span itemprop="name">spring</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
+            <a href="/tags/Optinal/" rel="tag"># Optinal</a>
           
-
+            <a href="/tags/java/" rel="tag"># java</a>
           
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
+      
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+      
       
       
 
       
-        
-          <p>spring Servlet ApplicationContext怎么启动?<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/07/01/spring-Servlet-ApplicationContext启动-md/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/01/spring-Servlet-ApplicationContext启动-md/" rel="next" title="spring Servlet ApplicationContext启动.md">
+                <i class="fa fa-chevron-left"></i> spring Servlet ApplicationContext启动.md
+              </a>
+            
           </div>
-          <!--/noindex-->
-        
-      
-    </p></div>
-    
-    
-    
 
-    
+          <span class="post-nav-divider"></span>
 
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/01/spring-Root-ApplicationContext启动/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="XJohn">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MonsterMei">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/07/01/spring-Root-ApplicationContext启动/" itemprop="url">spring启动</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+          <div class="post-nav-prev post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-01T22:02:57+08:00">
-                2019-07-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/spring/" itemprop="url" rel="index">
-                    <span itemprop="name">spring</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <p>spring容器怎么启动?<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/07/01/spring-Root-ApplicationContext启动/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </p></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -688,156 +428,11 @@
   </article>
 
 
-    
+
+    <div class="post-spread">
       
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/18/spring事务/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="XJohn">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MonsterMei">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/18/spring事务/" itemprop="url">spring事务</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-18T00:31:45+08:00">
-                2018-12-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
-                  <a href="/categories/spring/" itemprop="url" rel="index">
-                    <span itemprop="name">spring</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>transactional<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/12/18/spring事务/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </p></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
+    </div>
   </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
-  
 
 
           </div>
@@ -845,6 +440,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -865,8 +464,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -926,6 +534,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#returning-value-with-get"><span class="nav-number">1.</span> <span class="nav-text">returning value with get()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#orElse-和orElseGet-区别"><span class="nav-number">2.</span> <span class="nav-text">orElse()和orElseGet()区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#stream-findFirst-orElseGet"><span class="nav-number">3.</span> <span class="nav-text">stream().findFirst().orElseGet()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#orElseThrow"><span class="nav-number">4.</span> <span class="nav-text">orElseThrow()</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -1066,6 +690,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
